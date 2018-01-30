@@ -1,0 +1,42 @@
+[submodule "components/telephony-backend"]
+	path = components/telephony-backend
+	url = git@github.com:keacloud/telephony-backend.git
+[submodule "components/new-call-center"]
+	path = components/new-call-center
+	url = git@github.com:keacloud/new-call-center.git
+[submodule "components/receipt-loader"]
+	path = components/receipt-loader
+	url = git@github.com:keacloud/receipt-loader.git
+[submodule "static/voice/master"]
+	path = static/voice/master
+	url = git@github.com:keacloud/voice.git
+[submodule "static/voice/staging"]
+	path = static/voice/staging
+	url = git@github.com:keacloud/voice_staging.git
+[submodule "libraries/python-aiml"]
+	path = libraries/python-aiml
+	url = git@github.com:keacloud/python-aiml.git
+[submodule "static/styles"]
+	path = static/styles
+	url = git@github.com:keacloud/kea-styles-bootstrap.git
+[submodule "components/sixpack-server"]
+	path = components/sixpack-server
+	url = git@github.com:keacloud/sixpack-server.git
+[submodule "libraries/heroku-buildpack-coconut"]
+	path = libraries/heroku-buildpack-coconut
+	url = git@github.com:keacloud/heroku-buildpack-coconut.git
+[submodule "libraries/redish"]
+	path = libraries/redish
+	url = git@github.com:keacloud/redish.git
+[submodule "libraries/smart_open"]
+	path = libraries/smart_open
+	url = git@github.com:keacloud/smart_open.git
+[submodule "libraries/simba"]
+	path = libraries/simba
+	url = git@github.com:keacloud/simba.git
+[submodule "libraries/speaker-recognition"]
+	path = libraries/speaker-recognition
+	url = git@github.com:keacloud/speaker-recognition.git
+[submodule "libraries/heroku-buildpack-ngrok"]
+	path = libraries/heroku-buildpack-ngrok
+	url = git@github.com:keacloud/heroku-buildpack-ngrok.git
