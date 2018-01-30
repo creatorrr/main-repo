@@ -8,11 +8,30 @@ Description
 
 KEA is a telecommunications platform that merchants use to take orders and requests automatically when customers call in.
 
+Process
+-------
+
+ - All code begins life as part of a component.
+ - Once tested and deployed, refactor aggressively.
+ - Recursively, move generalizable components to libraries.
+ - Open source libraries once sufficient documentation is added.
+ - Let the world maintain it for ya.
+
+Branches
+--------
+
+ - `master`: The untouchable branch. Only merges allowed after CI passes.
+ - `staging`: Base branch for fix/feature branch. Only merges allowed after CI passes.
+ - `develop`: **Special** Orphan branch. All experimental stuff base on this. Be aware that merging into _staging_ is non-trivial.
+
 Notes
 -----
 
 Structure
 ---------
+
+ - Logically separate projects are referenced as [git-submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+ - Use [git-hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) amply to maintain sanity checks.
 
 ```
 system-n/
