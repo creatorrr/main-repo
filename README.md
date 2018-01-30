@@ -14,12 +14,14 @@ Notes
 Structure
 ---------
 
-`.`
- └── `components`
- └── `deploy`
- └── `docs`
- └── `libraries`
- └── `metadata`
- └── `static`
- └── `test`
- └── `tools`
+```
+system-n
+  └── components
+  └── deploy
+  └── docs
+  └── libraries
+  └── metadata
+  └── static
+  └── test
+  └── tools
+```
