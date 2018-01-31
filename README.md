@@ -24,11 +24,61 @@ Branches
  - `staging`: Base branch for fix/feature branch. Only merges allowed after CI passes.
  - `develop`: **Special** Orphan branch. All experimental stuff base on this. Be aware that merging into _staging_ is non-trivial.
 
+Schematic
+---------
+
+![System-N Schematic | How it works](https://github.com/keacloud/system-n/blob/master/diagram.svg)
+
+<!-- Created using https://bramp.github.io/js-sequence-diagrams/ with source:
+
+Title: System-N
+
+participant customer
+participant twilio
+participant postgres
+participant aiml
+participant wallaroo
+participant simba
+participant call center
+participant restaurant
+
+Note right of twilio: ────────\nKEA App\nBoundary\n────────
+
+customer->twilio: Calls store\n phone number
+Note right of customer: Redirected\nto twilio #
+
+Note over postgres: Primary API\n(PostgREST)
+twilio->postgres: Make request\nto application
+
+Note over aiml: Dialogue\nEngine
+postgres->aiml: Generate\nresponse
+
+aiml->twilio: TwiML response
+twilio->customer:Handle call
+customer->twilio:
+
+Note over wallaroo: Task\nPipeline
+postgres->wallaroo: Trigger entity\nrecognition
+
+Note over simba: TaskRouter
+wallaroo->simba: Create order task
+
+Note over call center: Call center\nTeam
+simba->call center: Assign task\nto correct worker\nfor verification
+
+call center->postgres: Order status
+postgres->wallaroo: Order status
+wallaroo->restaurant: Send order to POS system
+wallaroo->customer: Send confirmation and receipt
+
+Note left of restaurant: ────────\nKEA App\nBoundary\n────────
+-->
+
 Notes
 -----
 
-Structure
----------
+Directory Structure
+-------------------
 
  - Logically separate projects are referenced as [git-submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
  - Use [git-hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) amply to maintain sanity checks.
