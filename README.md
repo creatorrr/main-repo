@@ -1,24 +1,23 @@
-system-n
-========
+keacloud/main-repo
+==================
 
-Master repository for all things [KEA](https://kea.ai)
+Master repository for all things [kea](https://kea.ai)
 
 Description
 -----------
 
-KEA is a telecommunications platform that merchants use to take orders and requests automatically when customers call in.
+[kea](https://kea.ai) is a telecommunications platform that merchants use to take orders and requests automatically when customers call in.
 
 Links
 -----
 
- - [Intranet](https://extra.kea.ai)
  - [Github projects page](https://github.com/orgs/keacloud/projects/)
- - [Issues page](https://github.com/keacloud/system-n/issues)
+ - [Issues page](https://github.com/keacloud/main-repo/issues)
 
 Schematic
 ---------
 
-![System-N Schematic | How it works](https://github.com/keacloud/system-n/blob/master/diagram.svg)
+![System-N Schematic | How it works](https://github.com/keacloud/main-repo/blob/master/diagram.svg)
 
 <!-- Created using https://bramp.github.io/js-sequence-diagrams/ with source:
 
@@ -26,43 +25,43 @@ Title: System-N
 
 participant customer
 participant twilio
-participant postgres
-participant aiml
-participant wallaroo
-participant simba
+participant data_api
+participant dialog_manager
+participant bg_tasks
+participant taskrouter
 participant call center
 participant restaurant
 
-Note right of twilio: ────────\nKEA App\nBoundary\n────────
+Note right of twilio: ────────\nkea App\nBoundary\n────────
 
 customer->twilio: Calls store\n phone number
 Note right of customer: Redirected\nto twilio #
 
-Note over postgres: Primary API\n(PostgREST)
-twilio->postgres: Make request\nto application
+Note over data_api: Primary API\n(PostgREST)
+twilio->data_api: Make request\nto application
 
-Note over aiml: Dialogue\nEngine
-postgres->aiml: Generate\nresponse
+Note over dialog_manager: Dialogue\nEngine
+data_api->dialog_manager: Generate\nresponse
 
-aiml->twilio: TwiML response
+dialog_manager->twilio: TwiML response
 twilio->customer:Handle call
 customer->twilio:
 
-Note over wallaroo: Task\nPipeline
-postgres->wallaroo: Trigger entity\nrecognition
+Note over bg_tasks: Background\nTasks
+data_api->bg_tasks: Trigger entity\nrecognition
 
-Note over simba: TaskRouter
-wallaroo->simba: Create order task
+Note over taskrouter: Task\nRouter
+bg_tasks->taskrouter: Create order task
 
 Note over call center: Call center\nTeam
-simba->call center: Assign task\nto correct worker\nfor verification
+taskrouter->call center: Assign task\nto correct worker\nfor verification
 
-call center->postgres: Order status
-postgres->wallaroo: Order status
-wallaroo->restaurant: Send order to POS system
-wallaroo->customer: Send confirmation and receipt
+call center->data_api: Order status
+data_api->bg_tasks: Order status
+bg_tasks->restaurant: Send order to POS system
+bg_tasks->customer: Send confirmation and receipt
 
-Note left of restaurant: ────────\nKEA App\nBoundary\n────────
+Note left of restaurant: ────────\nkea App\nBoundary\n────────
 -->
 
 Process
@@ -73,6 +72,7 @@ Process
  - Recursively, move generalizable components to libraries.
  - Open source libraries once sufficient documentation is added.
  - Let the world maintain it for ya.
+ - Stand on the shoulders of giants, use [kubernetes](https://kubernetes.io/) and friends for managed CI/CD.
 
 Branches
 --------
@@ -151,7 +151,7 @@ Directory Structure
      * Any other relevant code.
 
 ```
-system-n/
+main-repo/
   |   README.md
   |   (you are here)
   |
@@ -165,7 +165,7 @@ system-n/
   |   (Application code)
   |
   └── components/
-  |   (contains individual components that make up the entire KEA stack)
+  |   (contains individual components that make up the entire kea stack)
   |   |
   |   └── sample-subcomponent/
   |   |   |
