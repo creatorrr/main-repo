@@ -188,6 +188,7 @@ Directory Structure
      * 0 or more `components`, which are basically nested **\<Component\>** s.
      * Required `README.md` and (optional) `docs/` folder.
      * Required `tests` directory containing any tests.
+     * Optional `deply` directory that contains kubernetes stack `yaml` files.
      * Optional `scripts` directory structured as **\<Scripts\>**.
      * Optional `metadata` directories which are free-form.
 
@@ -225,6 +226,11 @@ main-repo/
   |   |       (Application code)
   |   |
   |   └── other-component/ ...
+  |
+  └── deploy/
+  |   (contains yaml kubernetes scripts for getting up and running)
+  |   |
+  |   └── *.yaml
   |
   └── scripts/
   |   (contains lint / build / deploy scripts for getting up and running)
