@@ -84,7 +84,7 @@ Notes
  - [eventrouter](https://github.com/heptiolabs/eventrouter)
  - [kubeless](http://kubeless.io)
  - [kubedb-memcached](https://github.com/kubedb/memcached)
- - [helm](https://github.com/heptio/contour/)
+ - [helm](https://github.com/kubernetes/helm)
  - [gitkube](https://github.com/hasura/gitkube)
  - [argo](https://github.com/argoproj/argo)
  - [contour](https://github.com/heptio/contour/)

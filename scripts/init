@@ -1,0 +1,134 @@
+#!/usr/bin/env bash
+
+function errtrap {
+  es=$?
+  echo "ERROR line $1: Command exited with status $es."
+}
+
+trap 'errtrap $LINENO' ERR  # is run whenever a command in the surrounding script or function exits with non-zero status
+
+function is_installed() {
+    hash $1 2>/dev/null
+}
+
+function install_pipsi() {
+    echo "Installing pipsi..."
+    curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python
+}
+
+function install_argo() {
+    echo "Installing argo..."
+
+    sudo curl -sSL -o /usr/local/bin/argo https://github.com/argoproj/argo/releases/download/v2.1.0/argo-linux-amd64
+    sudo chmod +x /usr/local/bin/argo
+}
+
+function install_helm() {
+    echo "Downloading helm release tarball..."
+    curl -sSL -o /tmp/helm.tar.gz https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz
+
+    echo "Installing helm..."
+
+    mkdir /tmp/helm-install
+    tar -C /tmp/helm-install -xvf /tmp/helm.tar.gz
+    sudo mv /tmp/helm-install/linux-amd64/helm /usr/local/bin/helm
+    sudo chmod +x /usr/local/bin/argo
+    rm -rf /tmp/helm*
+}
+
+function install_gcloud() {
+    echo "Installing gcloud..."
+
+    # Create environment variable for correct distribution
+    export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+
+    # Add the Cloud SDK distribution URI as a package source
+    echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+
+    # Import the Google Cloud Platform public key
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+    # Update the package list and install the Cloud SDK
+    sudo apt-get update && sudo apt-get install google-cloud-sdk
+}
+
+function install_kubectl() {
+    echo "Installing kubectl..."
+    gcloud components install kubectl
+}
+
+function install_jq() {
+    echo "Installing jq..."
+    sudo apt install jq
+}
+
+function install_yq() {
+    echo "Installing yq..."
+    pipsi install yq
+}
+
+function install_vault() {
+    echo "Downloading vault release zip..."
+
+    curl -sSL -o /tmp/vault.zip https://releases.hashicorp.com/vault/0.10.1/vault_0.10.1_linux_amd64.zip
+
+    echo "Installing vault..."
+
+    mkdir /tmp/vault-install
+    unzip /tmp/vault.zip -d /tmp/vault-install
+    sudo mv /tmp/vault-install/vault /usr/local/bin/vault
+    sudo chmod +x /usr/local/bin/vault
+    rm -rf /tmp/vault*
+}
+
+function install_sc() {
+    echo "Downloading service catalog release tarball..."
+
+    curl -sSL -o /tmp/sc.tar.gz https://github.com/GoogleCloudPlatform/k8s-service-catalog/releases/download/v1.0.0-beta.3/service-catalog-installer-v1.0.0-beta.3-linux.tgz
+
+    echo "Installing sc..."
+
+    mkdir /tmp/sc-install
+    tar -C /tmp/sc-install -xvf /tmp/sc.tar.gz
+    sudo mv /tmp/sc-install/sc /usr/local/bin/sc
+    sudo mv /tmp/sc-install/cfssl /usr/local/bin/cfssl
+    sudo mv /tmp/sc-install/cfssljson /usr/local/bin/cfssljson
+    sudo chmod +x /usr/local/bin/sc
+    sudo chmod +x /usr/local/bin/cfssl
+    sudo chmod +x /usr/local/bin/cfssljson
+    rm -rf /tmp/sc*
+}
+
+function install_onessl() {
+    echo "Installing onessl..."
+
+    curl -fsSL -o onessl https://github.com/kubepack/onessl/releases/download/0.3.0/onessl-linux-amd64 \
+        && chmod +x onessl \
+        && sudo mv onessl /usr/local/bin/
+}
+
+function install_svcat() {
+    echo "Downloading svcat release tarball..."
+
+    curl -sLO https://download.svcat.sh/cli/latest/linux/amd64/svcat
+
+    echo "Installing svcat..."
+
+    chmod +x ./svcat
+    sudo mv ./svcat /usr/local/bin/
+}
+
+# Install required tools
+is_installed pipsi || install_pipsi
+is_installed jq || install_jq
+is_installed gcloud || install_gcloud
+is_installed kubectl || install_kubectl
+is_installed helm || install_helm
+is_installed argo || install_argo
+is_installed yq || install_yq
+is_installed vault || install_vault
+is_installed sc || install_sc
+is_installed onessl || install_onessl
+is_installed svcat || install_svcat
+
+echo "All tools were installed successfully"

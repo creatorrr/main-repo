@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+function errtrap {
+  es=$?
+  echo "ERROR line $1: Command exited with status $es."
+}
+
+trap 'errtrap $LINENO' ERR  # is run whenever a command in the surrounding script or function exits with non-zero status
+
+HELM_DIR=./deploy/helm-charts
+HELM_MANIFEST_FILE=./deploy/helm-charts/index.yaml
+HELM_MANIFEST=$(cat "${HELM_MANIFEST_FILE}")
+
+function get_manifest_repos() {
+    echo "${HELM_MANIFEST}" | yq -c -r '.repos | to_entries | .[]'
+}
+
+function add_repo() {
+    local repo_name=$1
+    local repo_url=$2
+
+    echo "Adding repo ${repo_name}..."
+
+    helm repo add "$repo_name" "$repo_url"
+}
+
+function add_manifest_repos() {
+    echo "Adding manifest repos..."
+
+    local repos="$(get_manifest_repos)"
+    for repo in $(echo "${repos}"); do
+        local repo_name=$(echo "${repo}" | jq  -r '.key')
+        local repo_url=$(echo "${repo}" | jq  -r '.value')
+        add_repo $repo_name $repo_url
+    done
+}
+
+add_manifest_repos
+helm repo update

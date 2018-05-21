@@ -1,7 +1,8 @@
 repos:
-  stable: http://storage.googleapis.com/kubernetes-charts-stable
+  stable: http://storage.googleapis.com/kubernetes-charts
   incubator: http://storage.googleapis.com/kubernetes-charts-incubator
-  # tc: http://trusted-charts.stackpoint.io
+  tc: http://trusted-charts.stackpoint.io
+  svc-cat: https://svc-catalog-charts.storage.googleapis.com
 
 charts:
   - package: stable/cert-manager
@@ -27,3 +28,7 @@ charts:
   - package: stable/kubedb
     opts: apiserver.ca="$(onessl get kube-ca)"
     name: kubedb
+
+  - package: svc-cat/catalog
+    name: catalog
+    namespace: catalog
