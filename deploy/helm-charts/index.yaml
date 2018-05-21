@@ -1,0 +1,29 @@
+repos:
+  stable: http://storage.googleapis.com/kubernetes-charts-stable
+  incubator: http://storage.googleapis.com/kubernetes-charts-incubator
+  # tc: http://trusted-charts.stackpoint.io
+
+charts:
+  - package: stable/cert-manager
+    name: cert-manager
+    namespace: kube-system
+
+  - package: stable/metabase
+    name: metabase
+
+  - package: stable/kubewatch
+
+  - package: incubator/vault
+    opts: vault.dev=false,vault.config.storage.gcs.bucket="kea-vault-data"
+
+  - package: stable/influxdb
+    opts: persistence.enabled=true,persistence.size=20Gi,setDefaultUser.enabled=true
+    name: influxdb
+
+  - package: stable/kapacitor
+    opts: influxURL=http://influxdb-influxdb.default:8086,persistence.enabled=true
+    name: kapacitor
+
+  - package: stable/kubedb
+    opts: apiserver.ca="$(onessl get kube-ca)"
+    name: kubedb

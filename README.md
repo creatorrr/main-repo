@@ -231,6 +231,10 @@ main-repo/
   |   (contains yaml kubernetes scripts for getting up and running)
   |   |
   |   └── *.yaml
+  |   |
+  |   └── helm-charts/
+  |   |   |
+  |   |   └── **/*.yaml
   |
   └── scripts/
   |   (contains lint / build / deploy scripts for getting up and running)
