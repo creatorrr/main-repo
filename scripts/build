@@ -1,0 +1,25 @@
+export CLOUDSDK_CONTAINER_USE_V1_API_CLIENT=false
+gcloud config set container/use_v1_api false
+gcloud config set compute/zone us-east1-c
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=diwank@kea.cloud
+kubectl create rolebinding default-admin --clusterrole=admin --serviceaccount=default:default
+
+helm init
+kubectl create serviceaccount --namespace kube-system tiller
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
+
+kubectl create ns kubeless
+for k_yml in deploy/*.yaml; do kubectl create -f $k_yml; done
+
+argo install
+curl -Ls https://get.weave.works | sh -s -- --token=a1cggeyxczjoed7pi11niujncpjo8igo --gke
+
+mkdir ssl_cert
+cd ssl_cert
+openssl genrsa -out kea-cert-1.key 2048
+openssl req -new -key kea-cert-1.key -out kea-cert-1.csr
+openssl x509 -req -days 365 -in kea-cert-1.csr -signkey kea-cert-1.key -out kea-cert-1.crt
+gcloud compute ssl-certificates create  kea-cert-1 --certificate kea-cert-1.crt --private-key kea-cert-1.key
+gcloud compute ssl-certificates describe kea-cert-1
+rm -rf ssl_cert
