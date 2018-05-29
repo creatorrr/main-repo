@@ -63,12 +63,6 @@ traefik:
   accessLogs.enabled: true
   accessLogs.format: json
 
-weave-cloud:
-  token: a1cggeyxczjoed7pi11niujncpjo8igo
-
-weave-scope:
-  probeToken: a1cggeyxczjoed7pi11niujncpjo8igo
-
 redis:
   usePassword: false
 

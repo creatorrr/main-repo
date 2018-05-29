@@ -5,12 +5,6 @@ dependencies:
 - name: openvpn
   repository: http://storage.googleapis.com/kubernetes-charts
   version: 3.5.1
-- name: weave-cloud
-  repository: http://storage.googleapis.com/kubernetes-charts
-  version: 0.2.1
-- name: weave-scope
-  repository: http://storage.googleapis.com/kubernetes-charts
-  version: 0.9.2
 - name: kubewatch
   repository: http://storage.googleapis.com/kubernetes-charts
   version: 0.3.1
@@ -41,5 +35,5 @@ dependencies:
 - name: telegraf-s
   repository: http://influx-charts.storage.googleapis.com
   version: 1.6.3
-digest: sha256:0678ec68ec079f44079fed186ed388af0780a7703adaf39322963e8125b42dea
-generated: 2018-05-28T19:50:12.875900804-07:00
+digest: sha256:dfec48f6e1c8b58829469c647bae44375356ba1193ec28e894d5824ad7dc19e3
+generated: 2018-05-28T20:58:51.995005483-07:00

@@ -8,14 +8,6 @@ dependencies:
     repository: http://storage.googleapis.com/kubernetes-charts
     version: 3.5.*
 
-  - name: weave-cloud
-    repository: http://storage.googleapis.com/kubernetes-charts
-    version: 0.2.*
-
-  - name: weave-scope
-    repository: http://storage.googleapis.com/kubernetes-charts
-    version: 0.9.*
-
   - name: kubewatch
     repository: http://storage.googleapis.com/kubernetes-charts
     version: 0.3.*
