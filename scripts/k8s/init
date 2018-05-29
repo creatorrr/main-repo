@@ -15,3 +15,6 @@ kubectl --namespace kube-system expose deployment gitkubed --type=LoadBalancer -
 kubectl create serviceaccount kubeapps-operator
 kubectl create clusterrolebinding kubeapps-operator --clusterrole=cluster-admin --serviceaccount=default:kubeapps-operator
 kubectl get secret $(kubectl get serviceaccount kubeapps-operator -o jsonpath='{.secrets[].name}') -o jsonpath='{.data.token}' | base64 --decode
+
+sc install
+sc add-gcp-broker

@@ -23,3 +23,6 @@ openssl x509 -req -days 365 -in kea-cert-1.csr -signkey kea-cert-1.key -out kea-
 gcloud compute ssl-certificates create  kea-cert-1 --certificate kea-cert-1.crt --private-key kea-cert-1.key
 gcloud compute ssl-certificates describe kea-cert-1
 rm -rf ssl_cert
+
+export GCP_PROJECT_ID=$(gcloud config get-value project)
+export GCP_PROJECT_NUMBER=$(gcloud projects describe $GCP_PROJECT_ID --format='value(projectNumber)')
