@@ -1,0 +1,45 @@
+dependencies:
+- name: traefik
+  repository: http://storage.googleapis.com/kubernetes-charts
+  version: 1.31.0
+- name: openvpn
+  repository: http://storage.googleapis.com/kubernetes-charts
+  version: 3.5.1
+- name: weave-cloud
+  repository: http://storage.googleapis.com/kubernetes-charts
+  version: 0.2.1
+- name: weave-scope
+  repository: http://storage.googleapis.com/kubernetes-charts
+  version: 0.9.2
+- name: kubewatch
+  repository: http://storage.googleapis.com/kubernetes-charts
+  version: 0.3.1
+- name: redis
+  repository: http://storage.googleapis.com/kubernetes-charts
+  version: 3.3.2
+- name: metabase
+  repository: http://storage.googleapis.com/kubernetes-charts
+  version: 0.4.1
+- name: luigi
+  repository: http://storage.googleapis.com/kubernetes-charts
+  version: 2.7.3
+- name: centrifugo
+  repository: http://storage.googleapis.com/kubernetes-charts
+  version: 2.0.1
+- name: catalog
+  repository: https://svc-catalog-charts.storage.googleapis.com
+  version: 0.1.20
+- name: influxdb
+  repository: http://influx-charts.storage.googleapis.com
+  version: 1.5.2
+- name: kapacitor
+  repository: http://influx-charts.storage.googleapis.com
+  version: 1.5.0
+- name: chronograf
+  repository: http://influx-charts.storage.googleapis.com
+  version: 1.5.0
+- name: telegraf-s
+  repository: http://influx-charts.storage.googleapis.com
+  version: 1.6.3
+digest: sha256:0678ec68ec079f44079fed186ed388af0780a7703adaf39322963e8125b42dea
+generated: 2018-05-28T19:50:12.875900804-07:00

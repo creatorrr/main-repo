@@ -1,3 +1,4 @@
+deploy/**/charts/*.tgz
 .envrc
 
 # Logs
