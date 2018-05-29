@@ -9,3 +9,9 @@ function create_staging_k8s() {
 function create_production_k8s() {
     gcloud beta container --project "kea-demo" clusters create "kea-production-k8s" --zone "us-east1-c" --no-enable-basic-auth --cluster-version "1.10.2-gke.3" --machine-type "n1-standard-2" --image-type "COS" --disk-type "pd-ssd" --disk-size "180" --node-labels environment=production --scopes "https://www.googleapis.com/auth/cloud-platform" --num-nodes "2" --enable-cloud-logging --enable-cloud-monitoring --enable-ip-alias --network "default" --subnetwork "default" --additional-zones "us-east1-b" --enable-autoscaling --min-nodes "2" --max-nodes "4" --enable-network-policy --enable-master-authorized-networks --master-authorized-networks 98.207.8.0/23 --addons HorizontalPodAutoscaling,HttpLoadBalancing --enable-autoupgrade --enable-autorepair --maintenance-window "10:00" --labels environment=production
 }
+
+kubectl --namespace kube-system expose deployment gitkubed --type=LoadBalancer --name=gitkubed
+
+kubectl create serviceaccount kubeapps-operator
+kubectl create clusterrolebinding kubeapps-operator --clusterrole=cluster-admin --serviceaccount=default:kubeapps-operator
+kubectl get secret $(kubectl get serviceaccount kubeapps-operator -o jsonpath='{.secrets[].name}') -o jsonpath='{.data.token}' | base64 --decode
