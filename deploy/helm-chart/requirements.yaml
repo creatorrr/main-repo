@@ -1,9 +1,5 @@
 dependencies:
 
-  - name: traefik
-    repository: http://storage.googleapis.com/kubernetes-charts
-    version: 1.31.*
-
   - name: openvpn
     repository: http://storage.googleapis.com/kubernetes-charts
     version: 3.5.*

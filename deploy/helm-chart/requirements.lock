@@ -1,7 +1,4 @@
 dependencies:
-- name: traefik
-  repository: http://storage.googleapis.com/kubernetes-charts
-  version: 1.31.0
 - name: openvpn
   repository: http://storage.googleapis.com/kubernetes-charts
   version: 3.5.1
@@ -10,22 +7,22 @@ dependencies:
   version: 0.3.1
 - name: redis
   repository: http://storage.googleapis.com/kubernetes-charts
-  version: 3.3.2
+  version: 3.3.6
 - name: metabase
   repository: http://storage.googleapis.com/kubernetes-charts
   version: 0.4.1
 - name: luigi
   repository: http://storage.googleapis.com/kubernetes-charts
-  version: 2.7.3
+  version: 2.7.4
 - name: centrifugo
   repository: http://storage.googleapis.com/kubernetes-charts
   version: 2.0.1
 - name: catalog
   repository: https://svc-catalog-charts.storage.googleapis.com
-  version: 0.1.20
+  version: 0.1.21
 - name: influxdb
   repository: http://influx-charts.storage.googleapis.com
-  version: 1.5.2
+  version: 1.5.3
 - name: kapacitor
   repository: http://influx-charts.storage.googleapis.com
   version: 1.5.0
@@ -35,5 +32,5 @@ dependencies:
 - name: telegraf-s
   repository: http://influx-charts.storage.googleapis.com
   version: 1.6.3
-digest: sha256:dfec48f6e1c8b58829469c647bae44375356ba1193ec28e894d5824ad7dc19e3
-generated: 2018-05-28T20:58:51.995005483-07:00
+digest: sha256:ce1acedd05c77e43992a66f7888037c4e0a331999c954e2c697c81b9ef721891
+generated: 2018-06-17T20:48:04.812231102-07:00
