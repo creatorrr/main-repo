@@ -40,9 +40,6 @@
 [submodule "libraries/heroku-buildpack-ngrok"]
 	path = libraries/heroku-buildpack-ngrok
 	url = git@github.com:keacloud/heroku-buildpack-ngrok.git
-[submodule "components/aiml"]
-	path = components/aiml
-	url = git@github.com:keacloud/aiml.git
 [submodule "components/landing-page"]
 	path = components/landing-page
 	url = git@github.com:keacloud/landing-page.git
