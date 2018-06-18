@@ -1,4 +1,4 @@
-# Default values for staging-chart.
+# Default values for helm-chart.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -44,31 +44,8 @@ tolerations: []
 
 affinity: {}
 
-traefik:
-  # loadBalancerIP: 0.0.0.0
-  rbac.enabled: true
-  proxyProtocol.enabled: true
-  ssl.enabled: true
-  ssl.enforced: true
-  acme:
-    enabled: true
-    dnsProvider:
-      name: cloudflare
-      cloudflare: {}
-    email: diwank@kea.cloud
-    staging: false
-
-  dashboard.enabled: true
-  dashboard.domain: traefik.kea.cloud
-  accessLogs.enabled: true
-  accessLogs.format: json
-
 redis:
   usePassword: false
-
-luigi:
-  persistence.enabled: true
-  ingressUI.enabled: true
 
 centrifugo:
   ingress.enabled: true

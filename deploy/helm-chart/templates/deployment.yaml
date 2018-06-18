@@ -1,22 +1,22 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ template "staging-chart.fullname" . }}
+  name: {{ template "helm-chart.fullname" . }}
   labels:
-    app: {{ template "staging-chart.name" . }}
-    chart: {{ template "staging-chart.chart" . }}
+    app: {{ template "helm-chart.name" . }}
+    chart: {{ template "helm-chart.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "staging-chart.name" . }}
+      app: {{ template "helm-chart.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "staging-chart.name" . }}
+        app: {{ template "helm-chart.name" . }}
         release: {{ .Release.Name }}
     spec:
       containers:
