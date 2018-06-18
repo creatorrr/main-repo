@@ -1,4 +1,5 @@
-export CLOUDSDK_CONTAINER_USE_V1_API_CLIENT=false
+#!/usr/bin/env bash
+
 gcloud config set container/use_v1_api false
 gcloud config set compute/zone us-east1-c
 kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=diwank@kea.cloud
@@ -9,8 +10,7 @@ kubectl create serviceaccount --namespace kube-system tiller
 kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
 
-kubectl create ns kubeless
-for k_yml in deploy/*.yaml; do kubectl create -f $k_yml; done
+kubectl create -f deploy/manifests
 
 argo install
 curl -Ls https://get.weave.works | sh -s -- --token=a1cggeyxczjoed7pi11niujncpjo8igo --gke
@@ -24,5 +24,15 @@ gcloud compute ssl-certificates create  kea-cert-1 --certificate kea-cert-1.crt 
 gcloud compute ssl-certificates describe kea-cert-1
 rm -rf ssl_cert
 
-export GCP_PROJECT_ID=$(gcloud config get-value project)
-export GCP_PROJECT_NUMBER=$(gcloud projects describe $GCP_PROJECT_ID --format='value(projectNumber)')
+kubectl --namespace kube-system expose deployment gitkubed --type=LoadBalancer --name=gitkubed
+
+kubectl create serviceaccount kubeapps-operator
+kubectl create clusterrolebinding kubeapps-operator --clusterrole=cluster-admin --serviceaccount=default:kubeapps-operator
+kubectl get secret $(kubectl get serviceaccount kubeapps-operator -o jsonpath='{.secrets[].name}') -o jsonpath='{.data.token}' | base64 --decode
+
+# For conduit GKE installation, see https://conduit.io/getting-started/
+kubectl create clusterrolebinding cluster-admin-binding-$GCLOUD_USER --clusterrole=cluster-admin --user=$(gcloud config get-value account)
+conduit install | kubectl apply -f -
+
+sc install
+sc add-gcp-broker

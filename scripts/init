@@ -16,6 +16,14 @@ function install_pipsi() {
     curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python
 }
 
+function install_conduit() {
+    echo "Installing conduit..."
+
+    curl https://run.conduit.io/install | sh
+    export PATH=$PATH:$HOME/.conduit/bin
+    echo "Add ~/.conduit/bin to PATH"
+}
+
 function install_argo() {
     echo "Installing argo..."
 
@@ -120,6 +128,7 @@ function install_svcat() {
 
 # Install required tools
 is_installed pipsi || install_pipsi
+is_installed conduit || install_conduit
 is_installed jq || install_jq
 is_installed gcloud || install_gcloud
 is_installed kubectl || install_kubectl
