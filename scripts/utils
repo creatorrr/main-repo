@@ -12,3 +12,11 @@ function get_cluster_ip() {
 function make_ip_static() {
     gcloud compute addresses create kea-k8s-`get_git_branch`-ip --addresses `get_cluster_ip` --region us-east1
 }
+
+function setup_gcr_secret() {
+    kubectl create secret docker-registry regsecret \
+      --docker-server=https://gcr.io \
+      --docker-username="_json_key" \
+      --docker-password="$(cat path-to-google-credentials.json)" \
+      --docker-email=diwank@kea.cloud
+}

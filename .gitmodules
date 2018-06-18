@@ -43,3 +43,6 @@
 [submodule "components/aiml"]
 	path = components/aiml
 	url = git@github.com:keacloud/aiml.git
+[submodule "components/landing-page"]
+	path = components/landing-page
+	url = git@github.com:keacloud/landing-page.git
