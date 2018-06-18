@@ -1,4 +1,7 @@
 dependencies:
+- name: fluent-bit
+  repository: http://storage.googleapis.com/kubernetes-charts
+  version: 0.6.0
 - name: openvpn
   repository: http://storage.googleapis.com/kubernetes-charts
   version: 3.5.1
@@ -32,5 +35,5 @@ dependencies:
 - name: telegraf-s
   repository: http://influx-charts.storage.googleapis.com
   version: 1.6.3
-digest: sha256:ce1acedd05c77e43992a66f7888037c4e0a331999c954e2c697c81b9ef721891
-generated: 2018-06-17T20:48:04.812231102-07:00
+digest: sha256:9c9723c7e64d7eb9ce99070dd3e857bf96d1ba8c3eee78d2bc1af27d2f3bc0cb
+generated: 2018-06-17T21:07:18.665796757-07:00
