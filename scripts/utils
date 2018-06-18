@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+function get_git_branch() {
+    echo "$(git branch | grep \* | cut -d ' ' -f2)"
+}
+
+function get_cluster_ip() {
+    CLUSTER_IP=$(kubectl get -n heptio-contour service contour -o wide | awk 'BEGIN {print} FNR == 2 {print $4}')
+    echo "${CLUSTER_IP}"
+}
+
+function make_ip_static() {
+    gcloud compute addresses create kea-k8s-`get_git_branch`-ip --addresses `get_cluster_ip` --region us-east1
+}
