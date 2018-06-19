@@ -16,6 +16,11 @@ function install_pipsi() {
     curl https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py | python
 }
 
+function install_gitkube() {
+    echo "Installing gitkube..."
+    curl https://raw.githubusercontent.com/hasura/gitkube/master/gimme.sh | sudo bash
+}
+
 function install_conduit() {
     echo "Installing conduit..."
 
@@ -128,6 +133,7 @@ function install_svcat() {
 
 # Install required tools
 is_installed pipsi || install_pipsi
+is_installed gitkube || install_gitkube
 is_installed conduit || install_conduit
 is_installed jq || install_jq
 is_installed gcloud || install_gcloud
