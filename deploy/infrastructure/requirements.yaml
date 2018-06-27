@@ -1,13 +1,5 @@
 dependencies:
 
-  - name: fluent-bit
-    repository: http://storage.googleapis.com/kubernetes-charts
-    version: 0.6.*
-
-  - name: openvpn
-    repository: http://storage.googleapis.com/kubernetes-charts
-    version: 3.5.*
-
   - name: kubewatch
     repository: http://storage.googleapis.com/kubernetes-charts
     version: 0.3.*
@@ -20,13 +12,9 @@ dependencies:
     repository: http://storage.googleapis.com/kubernetes-charts
     version: 0.4.*
 
-  - name: luigi
+  - name: drone
     repository: http://storage.googleapis.com/kubernetes-charts
-    version: 2.7.*
-
-  - name: centrifugo
-    repository: http://storage.googleapis.com/kubernetes-charts
-    version: 2.0.*
+    version: 1.2.*
 
   - name: influxdb
     repository: http://influx-charts.storage.googleapis.com

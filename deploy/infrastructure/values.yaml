@@ -69,3 +69,21 @@ chronograf:
 telegraf:
   influxURL: http://influxdb-influxdb.default:8086
   persistence.enabled: true
+
+# Kube-watch (https://github.com/bitnami-labs/kubewatch)
+rbac:
+  create: true
+
+resourcesToWatch:
+  daemonset: true
+  deployment: true
+  pod: true
+  replicaset: true
+  replicationcontroller: true
+  services: true
+  secret: true
+  configmap: true
+
+slack:
+  channel: '#engineering'
+  token: 'xoxb-230029605462-388577389121-Ec3GQekUHSf8TxC8L6bVldAJ'

@@ -1,10 +1,4 @@
 dependencies:
-- name: fluent-bit
-  repository: http://storage.googleapis.com/kubernetes-charts
-  version: 0.6.0
-- name: openvpn
-  repository: http://storage.googleapis.com/kubernetes-charts
-  version: 3.5.1
 - name: kubewatch
   repository: http://storage.googleapis.com/kubernetes-charts
   version: 0.3.1
@@ -14,15 +8,9 @@ dependencies:
 - name: metabase
   repository: http://storage.googleapis.com/kubernetes-charts
   version: 0.4.1
-- name: luigi
+- name: drone
   repository: http://storage.googleapis.com/kubernetes-charts
-  version: 2.7.4
-- name: centrifugo
-  repository: http://storage.googleapis.com/kubernetes-charts
-  version: 2.0.1
-- name: catalog
-  repository: https://svc-catalog-charts.storage.googleapis.com
-  version: 0.1.21
+  version: 1.2.0
 - name: influxdb
   repository: http://influx-charts.storage.googleapis.com
   version: 1.5.3
@@ -35,5 +23,5 @@ dependencies:
 - name: telegraf-s
   repository: http://influx-charts.storage.googleapis.com
   version: 1.6.3
-digest: sha256:9c9723c7e64d7eb9ce99070dd3e857bf96d1ba8c3eee78d2bc1af27d2f3bc0cb
-generated: 2018-06-17T21:07:18.665796757-07:00
+digest: sha256:1ded4431fb4550b656c3e3bccce90cdf064b7c10f8dcca5e1f9d82a3546a4ec8
+generated: 2018-06-27T11:32:59.839767054-07:00
