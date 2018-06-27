@@ -1,0 +1,119 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: freeswitch
+  labels:
+    app: freeswitch
+    project: telephoneorg
+    environment: production
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: freeswitch
+        project: telephoneorg
+        environment: production
+    spec:
+      terminationGracePeriodSeconds: 60
+      hostNetwork: true
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: media-server
+                operator: In
+                values:
+                - 'true'
+      containers:
+      - name: freeswitch
+        image: telephoneorg/freeswitch
+        imagePullPolicy: Always
+        securityContext:
+          capabilities:
+            add:
+            - IPC_LOCK
+            - NET_ADMIN
+            - NET_RAW
+            - NET_BROADCAST
+            - SYS_NICE
+            - SYS_RESOURCE
+        env:
+        - name: ERLANG_HOSTNAME
+          valueFrom:
+            configMapKeyRef:
+              name: freeswitch
+              key: erlang.hostname
+        - name: ERLANG_COOKIE
+          valueFrom:
+            secretKeyRef:
+              name: erlang
+              key: cookie
+        - name: FREESWITCH_LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: freeswitch
+              key: freeswitch.log.level
+        - name: FREESWITCH_LOG_COLOR
+          valueFrom:
+            configMapKeyRef:
+              name: freeswitch
+              key: freeswitch.log.color
+        - name: FREESWITCH_RTP_PORT_RANGE
+          valueFrom:
+            configMapKeyRef:
+              name: freeswitch
+              key: freeswitch.rtp.port-range
+        - name: FREESWITCH_DISABLE_NAT_DETECTION
+          valueFrom:
+            configMapKeyRef:
+              name: freeswitch
+              key: freeswitch.disable-nat-detection
+        - name: FREESWITCH_TLS_ENABLE
+          valueFrom:
+            configMapKeyRef:
+              name: freeswitch
+              key: freeswitch.tls.enable
+        ports:
+        - name: mod-kazoo
+          containerPort:  8031
+        - name: sip
+          protocol: UDP
+          containerPort: 11000
+        resources:
+          requests:
+            cpu: 8
+            memory: 6Gi
+          limits:
+            cpu: 8
+            memory: 6Gi
+        readinessProbe:
+          exec:
+            command: ["fs_cli", "-x", "status", "|", "grep", "-q", "^UP"]
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+        livenessProbe:
+          exec:
+            command: ["fs_cli", "-x", "status", "|", "grep", "-q", "^UP"]
+          initialDelaySeconds: 15
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+        volumeMounts:
+        - name: freeswitch-ramfs
+          mountPath: /volumes/freeswitch
+      volumes:
+      - name: freeswitch-ramfs
+        emptyDir:
+          medium: Memory
+      restartPolicy: Always
+      dnsPolicy: ClusterFirstWithHostNet
