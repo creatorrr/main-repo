@@ -16,6 +16,10 @@ dependencies:
     repository: http://storage.googleapis.com/kubernetes-charts
     version: 1.2.*
 
+  - name: elasticsearch
+    repository: http://storage.googleapis.com/kubernetes-charts-incubator
+    version: 1.1.*
+
   - name: influxdb
     repository: http://influx-charts.storage.googleapis.com
     version: 1.5.*

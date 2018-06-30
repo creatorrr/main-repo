@@ -11,6 +11,9 @@ dependencies:
 - name: drone
   repository: http://storage.googleapis.com/kubernetes-charts
   version: 1.2.0
+- name: elasticsearch
+  repository: http://storage.googleapis.com/kubernetes-charts-incubator
+  version: 1.1.1
 - name: influxdb
   repository: http://influx-charts.storage.googleapis.com
   version: 1.5.3
@@ -23,5 +26,5 @@ dependencies:
 - name: telegraf-s
   repository: http://influx-charts.storage.googleapis.com
   version: 1.6.3
-digest: sha256:1ded4431fb4550b656c3e3bccce90cdf064b7c10f8dcca5e1f9d82a3546a4ec8
-generated: 2018-06-27T11:32:59.839767054-07:00
+digest: sha256:d97d2366e86891d1d05c21314fb8059b2249c12f8bed7a4278c1d74c1f310c7a
+generated: 2018-06-29T17:09:23.922653524-07:00
