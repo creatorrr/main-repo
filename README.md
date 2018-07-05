@@ -81,33 +81,21 @@ Notes
 ### Kubernetes extensions
 
  - [helm](https://github.com/kubernetes/helm)
- - [traefik](https://github.com/kubernetes/charts/blob/master/stable/traefik)
- - [openvpn](https://github.com/kubernetes/charts/blob/master/stable/openvpn)
+ - [contour](https://github.com/heptio/contour)
  - [weave-cloud](https://cloud.weave.works)
  - [weave-scope](https://cloud.weave.works)
  - [kubewatch](https://github.com/kubernetes/charts/blob/master/stable/kubewatch)
  - [redis](https://github.com/kubernetes/charts/blob/master/stable/redis)
  - [kubeless](http://kubeless.io)
  - [metabase](https://github.com/kubernetes/charts/blob/master/stable/metabase/)
- - [luigi](https://github.com/kubernetes/charts/tree/master/stable/luigi)
- - [centrifugo](https://github.com/kubernetes/charts/tree/master/stable/centrifugo)
  - [google-service-catalog](https://github.com/kubernetes-incubator/service-catalog)
  - [influxdb](https://github.com/kubernetes/charts/blob/master/stable/influxdb/)
  - [chronograf](https://github.com/kubernetes/charts/blob/master/stable/chronograf/)
  - [kapacitor](https://github.com/kubernetes/charts/blob/master/stable/kapacitor/)
  - [telegraf](https://github.com/kubernetes/charts/blob/master/stable/influxdb/)
-
  - [kubeapps](https://github.com/kubeapps/kubeapps/blob/master/docs/getting-started.md)
  - [eventrouter](https://github.com/heptiolabs/eventrouter)
  - [gitkube](https://github.com/hasura/gitkube)
- - [argo](https://github.com/argoproj/argo)
-
-### Kubernetes static tools
-
- - [psykube](https://github.com/psykube/psykube)
- - [kompose](https://github.com/kubernetes/kompose)
- - [kubesec](https://kubesec.io)
- - [telepresence](https://www.telepresence.io/tutorials/docker)
 
 Environments
 ------------
@@ -225,6 +213,10 @@ main-repo/
   |   └── sample-subcomponent/
   |   |   |
   |   |   └── README.md
+  |   |   └── deploy/
+  |   |   |   (helm chart for deploying component)
+  |   |   |
+  |   |   └── Dockerfile
   |   |   └── { ... }
   |   |   |
   |   |   └── **/* ...
@@ -237,25 +229,10 @@ main-repo/
   |   |
   |   └── *.yaml
   |   |
-  |   └── helm-charts/
-  |   |   |
-  |   |   └── **/*.yaml
+  |   └── infrastructure/
+  |       |
+  |       └── **/*.yaml
   |
-  └── scripts/
-  |   (contains lint / build / deploy scripts for getting up and running)
-  |   |
-  |   └── README.md
-  |   |
-  |   └── config/
-  |   |   |
-  |   |   └── **/*.(yml|json|xml)   # Config files
-  |   |
-  |   └── build
-  |   └── init
-  |   └── lint
-  |   └── deploy
-  |
-  └── metadata/
   └── tests/
 ```
 

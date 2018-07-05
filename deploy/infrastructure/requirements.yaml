@@ -12,10 +12,6 @@ dependencies:
     repository: http://storage.googleapis.com/kubernetes-charts
     version: 0.4.*
 
-  - name: drone
-    repository: http://storage.googleapis.com/kubernetes-charts
-    version: 1.2.*
-
   - name: elasticsearch
     repository: http://storage.googleapis.com/kubernetes-charts-incubator
     version: 1.1.*
