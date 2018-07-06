@@ -1,9 +1,9 @@
 [submodule "components/landing-page"]
 	path = components/landing-page
 	url = git@github.com:keacloud/landing-page.git
-[submodule "components/call-center-ui"]
-	path = components/call-center-ui
-	url = git@github.com:keacloud/call-center.git
 [submodule "components/client-dashboard"]
 	path = components/client-dashboard
 	url = git@github.com:keacloud/client-dashboard.git
+[submodule "components/call-center"]
+	path = components/call-center
+	url = git@github.com:keacloud/call-center.git
